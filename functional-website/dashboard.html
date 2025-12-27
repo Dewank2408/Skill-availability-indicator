@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Campus Connect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Campus Connect</h2>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active">
+                <span class="icon">🏠</span>
+                <span class="label">Dashboard</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="icon">👤</span>
+                <span class="label">My Profile</span>
+            </a>
+            <a href="discover.html" class="nav-item">
+                <span class="icon">🔍</span>
+                <span class="label">Discover Peers</span>
+            </a>
+            <a href="messages.html" class="nav-item">
+                <span class="icon">💬</span>
+                <span class="label">Messages</span>
+                <span class="badge">3</span>
+            </a>
+            <a href="connections.html" class="nav-item">
+                <span class="icon">🤝</span>
+                <span class="label">Connections</span>
+            </a>
+            <a href="projects.html" class="nav-item">
+                <span class="icon">📁</span>
+                <span class="label">Projects</span>
+            </a>
+            <a href="communities.html" class="nav-item">
+                <span class="icon">👥</span>
+                <span class="label">Communities</span>
+            </a>
+            <a href="events.html" class="nav-item">
+                <span class="icon">📅</span>
+                <span class="label">Events</span>
+            </a>
+            <a href="mentorship.html" class="nav-item">
+                <span class="icon">🎓</span>
+                <span class="label">Mentorship</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <span class="icon">⚙️</span>
+                <span class="label">Settings</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="btn btn-small btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <input type="text" placeholder="Search students, projects, communities..." id="globalSearch">
+            </div>
+            
+            <div class="top-bar-actions">
+                <div class="notifications-btn" id="notificationsBtn">
+                    <span class="icon">🔔</span>
+                    <span class="badge">5</span>
+                </div>
+                
+                <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+                    <img src="assets/default-avatar.png" alt="Profile" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect fill=\'%234A90E2\' width=\'40\' height=\'40\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'white\' font-size=\'16\'%3EU%3C/text%3E%3C/svg%3E'">
+                    <span id="userNameDisplay">User</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Dashboard Content -->
+        <div class="dashboard-container">
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🤝</div>
+                    <div class="stat-content">
+                        <h3 id="connectionsCount">24</h3>
+                        <p>Connections</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📁</div>
+                    <div class="stat-content">
+                        <h3 id="projectsCount">5</h3>
+                        <p>Active Projects</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <h3 id="communitiesCount">8</h3>
+                        <p>Communities</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-content">
+                        <h3 id="badgesCount">12</h3>
+                        <p>Badges Earned</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Left Column -->
+                <div class="dashboard-left">
+                    <!-- Activity Feed -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Activity Feed</h2>
+                            <button class="btn-text" onclick="refreshFeed()">Refresh</button>
+                        </div>
+                        <div class="activity-feed" id="activityFeed">
+                            <!-- Activity items will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Recommended Projects -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Recommended Projects</h2>
+                            <a href="projects.html" class="btn-text">View All</a>
+                        </div>
+                        <div class="project-list" id="recommendedProjects">
+                            <!-- Projects will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="dashboard-right">
+                    <!-- Connection Requests -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Connection Requests</h2>
+                            <span class="badge" id="requestsCount">2</span>
+                        </div>
+                        <div class="connection-requests" id="connectionRequests">
+                            <!-- Requests will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Suggested Connections -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>People You May Know</h2>
+                        </div>
+                        <div class="suggested-connections" id="suggestedConnections">
+                            <!-- Suggestions will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Upcoming Events -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Upcoming Events</h2>
+                            <a href="events.html" class="btn-text">View All</a>
+                        </div>
+                        <div class="events-list" id="upcomingEvents">
+                            <!-- Events will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notifications Dropdown -->
+    <div class="notifications-dropdown" id="notificationsDropdown">
+        <div class="notifications-header">
+            <h3>Notifications</h3>
+            <button class="btn-text" onclick="markAllRead()">Mark all as read</button>
+        </div>
+        <div class="notifications-list" id="notificationsList">
+            <!-- Notifications will be loaded here -->
+        </div>
+        <div class="notifications-footer">
+            <a href="notifications.html">View All Notifications</a>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

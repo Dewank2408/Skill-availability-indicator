@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Skill Map - Campus Connect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/skill-map.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Campus Connect</h2>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <span class="icon">🏠</span>
+                <span class="label">Dashboard</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="icon">👤</span>
+                <span class="label">My Profile</span>
+            </a>
+            <a href="discover.html" class="nav-item">
+                <span class="icon">🔍</span>
+                <span class="label">Discover Peers</span>
+            </a>
+            <a href="skill-map.html" class="nav-item active">
+                <span class="icon">🗺️</span>
+                <span class="label">Skill Map</span>
+            </a>
+            <a href="messages.html" class="nav-item">
+                <span class="icon">💬</span>
+                <span class="label">Messages</span>
+            </a>
+            <a href="connections.html" class="nav-item">
+                <span class="icon">🤝</span>
+                <span class="label">Connections</span>
+            </a>
+            <a href="projects.html" class="nav-item">
+                <span class="icon">📁</span>
+                <span class="label">Projects</span>
+            </a>
+            <a href="communities.html" class="nav-item">
+                <span class="icon">👥</span>
+                <span class="label">Communities</span>
+            </a>
+            <a href="events.html" class="nav-item">
+                <span class="icon">📅</span>
+                <span class="label">Events</span>
+            </a>
+            <a href="mentorship.html" class="nav-item">
+                <span class="icon">🎓</span>
+                <span class="label">Mentorship</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <span class="icon">⚙️</span>
+                <span class="label">Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn btn-small btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <input type="text" placeholder="Search skills..." id="skillSearch">
+            </div>
+
+            <div class="top-bar-actions">
+                <div class="notifications-btn" id="notificationsBtn">
+                    <span class="icon">🔔</span>
+                    <span class="badge">5</span>
+                </div>
+
+                <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+                    <img src="assets/default-avatar.png" alt="Profile"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect fill=\'%234A90E2\' width=\'40\' height=\'40\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'white\' font-size=\'16\'%3EU%3C/text%3E%3C/svg%3E'">
+                    <span id="userNameDisplay">User</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Skill Map Content -->
+        <div class="skill-map-container">
+            <div class="page-header">
+                <h1 class="page-title">🗺️ Campus Skill Map</h1>
+                <p class="page-subtitle">Visualize and explore skills across the entire campus</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="skill-stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <h3 id="totalSkills">0</h3>
+                        <p>Total Skills</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <h3 id="skilledStudents">0</h3>
+                        <p>Skilled Students</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-content">
+                        <h3 id="trendingSkill">-</h3>
+                        <p>Top Skill</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-content">
+                        <h3 id="growthRate">0%</h3>
+                        <p>Growth Rate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <label>Department</label>
+                    <select id="filterDepartment">
+                        <option value="">All Departments</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Business">Business</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Science">Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Year</label>
+                    <select id="filterYear">
+                        <option value="">All Years</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                        <option value="Graduate">Graduate</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Skill Category</label>
+                    <select id="filterCategory">
+                        <option value="">All Categories</option>
+                        <option value="Programming">Programming</option>
+                        <option value="Design">Design</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Mobile Development">Mobile Development</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" id="applyFilters">Apply Filters</button>
+            </div>
+
+            <!-- Top Skills Chart -->
+            <div class="chart-section">
+                <div class="chart-header">
+                    <h2>Top 10 Skills on Campus</h2>
+                    <button class="btn btn-secondary btn-small" id="exportChart">Export</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="topSkillsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Skills by Department -->
+            <div class="chart-section">
+                <h2>Skills Distribution by Department</h2>
+                <div class="chart-container">
+                    <canvas id="departmentChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Trending Skills -->
+            <div class="trending-section">
+                <h2>🔥 Trending Skills</h2>
+                <div class="trending-skills-grid" id="trendingSkillsGrid">
+                    <!-- Trending skills will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Skill Details -->
+            <div class="skill-details-section">
+                <h2>Explore Skills</h2>
+                <div class="skills-list" id="skillsList">
+                    <!-- Skill items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Student Modal -->
+            <div class="modal" id="studentsModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="modalSkillName">Students with this skill</h3>
+                        <button class="modal-close" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modalStudentsList">
+                            <!-- Students list will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/skill-map.js"></script>
+</body>
+
+</html>

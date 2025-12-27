@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Campus Connect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/messages.css">
+</head>
+
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Campus Connect</h2>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <span class="icon">🏠</span>
+                <span class="label">Dashboard</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="icon">👤</span>
+                <span class="label">My Profile</span>
+            </a>
+            <a href="discover.html" class="nav-item">
+                <span class="icon">🔍</span>
+                <span class="label">Discover Peers</span>
+            </a>
+            <a href="messages.html" class="nav-item active">
+                <span class="icon">💬</span>
+                <span class="label">Messages</span>
+                <span class="badge">3</span>
+            </a>
+            <a href="connections.html" class="nav-item">
+                <span class="icon">🤝</span>
+                <span class="label">Connections</span>
+            </a>
+            <a href="projects.html" class="nav-item">
+                <span class="icon">📁</span>
+                <span class="label">Projects</span>
+            </a>
+            <a href="communities.html" class="nav-item">
+                <span class="icon">👥</span>
+                <span class="label">Communities</span>
+            </a>
+            <a href="events.html" class="nav-item">
+                <span class="icon">📅</span>
+                <span class="label">Events</span>
+            </a>
+            <a href="mentorship.html" class="nav-item">
+                <span class="icon">🎓</span>
+                <span class="label">Mentorship</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <span class="icon">⚙️</span>
+                <span class="label">Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn btn-small btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <input type="text" placeholder="Search conversations..." id="conversationSearch">
+            </div>
+
+            <div class="top-bar-actions">
+                <div class="notifications-btn" id="notificationsBtn">
+                    <span class="icon">🔔</span>
+                    <span class="badge">5</span>
+                </div>
+
+                <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+                    <img src="assets/default-avatar.png" alt="Profile"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect fill=\'%234A90E2\' width=\'40\' height=\'40\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'white\' font-size=\'16\'%3EU%3C/text%3E%3C/svg%3E'">
+                    <span id="userNameDisplay">User</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Messages Container -->
+        <div class="messages-container">
+            <!-- Conversations List -->
+            <div class="conversations-sidebar" id="conversationsSidebar">
+                <div class="conversations-header">
+                    <h2>Messages</h2>
+                    <button class="btn-icon" onclick="showNewMessageModal()" title="New Message">
+                        ✏️
+                    </button>
+                </div>
+
+                <!-- Conversation Type Tabs -->
+                <div class="conversation-tabs">
+                    <button class="tab-btn active" data-type="all" onclick="filterConversations('all')">
+                        All
+                    </button>
+                    <button class="tab-btn" data-type="direct" onclick="filterConversations('direct')">
+                        Direct
+                    </button>
+                    <button class="tab-btn" data-type="group" onclick="filterConversations('group')">
+                        Groups
+                    </button>
+                </div>
+
+                <!-- Conversations List -->
+                <div class="conversations-list" id="conversationsList">
+                    <!-- Conversations will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="chat-area" id="chatArea">
+                <!-- Empty State -->
+                <div class="chat-empty-state" id="chatEmptyState">
+                    <div class="empty-icon">💬</div>
+                    <h3>Select a conversation</h3>
+                    <p>Choose from your existing conversations or start a new one</p>
+                    <button class="btn btn-primary" onclick="showNewMessageModal()">
+                        New Message
+                    </button>
+                </div>
+
+                <!-- Active Chat -->
+                <div class="active-chat" id="activeChat" style="display: none;">
+                    <!-- Chat Header -->
+                    <div class="chat-header">
+                        <div class="chat-header-info">
+                            <div class="chat-avatar" id="chatAvatar">U</div>
+                            <div class="chat-header-text">
+                                <h3 id="chatName">User Name</h3>
+                                <p id="chatStatus">Online</p>
+                            </div>
+                        </div>
+                        <div class="chat-header-actions">
+                            <button class="btn-icon" onclick="alert('Call feature coming soon!')"
+                                title="Call">📞</button>
+                            <button class="btn-icon" onclick="alert('Video call coming soon!')"
+                                title="Video">📹</button>
+                            <button class="btn-icon" onclick="showChatInfo()" title="Info">ℹ️</button>
+                        </div>
+                    </div>
+
+                    <!-- Messages Container -->
+                    <div class="messages-area" id="messagesArea">
+                        <!-- Messages will be loaded here -->
+                    </div>
+
+                    <!-- Message Input -->
+                    <div class="message-input-container">
+                        <button class="btn-icon" onclick="alert('Attach files coming soon!')" title="Attach">📎</button>
+                        <input type="text" id="messageInput" placeholder="Type a message..."
+                            onkeypress="handleMessageKeyPress(event)">
+                        <button class="btn-icon" onclick="alert('Emojis coming soon!')" title="Emoji">😊</button>
+                        <button class="btn btn-primary btn-send" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Info Panel (for group chats) -->
+            <div class="chat-info-panel" id="chatInfoPanel" style="display: none;">
+                <div class="chat-info-header">
+                    <h3>Chat Details</h3>
+                    <button class="btn-icon" onclick="closeChatInfo()">✕</button>
+                </div>
+
+                <div class="chat-info-content">
+                    <div class="info-section">
+                        <h4>Members</h4>
+                        <div id="chatMembers">
+                            <!-- Members list will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h4>Shared Files</h4>
+                        <p class="text-light">No files shared yet</p>
+                    </div>
+
+                    <div class="info-section">
+                        <button class="btn btn-secondary" onclick="alert('Mute conversation')">
+                            🔕 Mute Notifications
+                        </button>
+                        <button class="btn btn-secondary" style="color: #ef4444;" onclick="alert('Leave conversation')">
+                            🚪 Leave Conversation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Message Modal -->
+    <div class="modal" id="newMessageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>New Message</h2>
+                <button class="modal-close" onclick="closeNewMessageModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>To:</label>
+                    <input type="text" id="newMessageRecipient" placeholder="Search for a connection...">
+                    <div id="recipientSuggestions" class="suggestions-list"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Message:</label>
+                    <textarea id="newMessageText" rows="4" placeholder="Type your message..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="closeNewMessageModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="sendNewMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/messages.js"></script>
+</body>
+
+</html>

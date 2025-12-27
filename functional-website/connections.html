@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connections - Campus Connect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/connections.css">
+</head>
+
+<body class="dashboard-page">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Campus Connect</h2><button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item"><span class="icon">🏠</span><span
+                    class="label">Dashboard</span></a>
+            <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label">My
+                    Profile</span></a>
+            <a href="discover.html" class="nav-item"><span class="icon">🔍</span><span class="label">Discover
+                    Peers</span></a>
+            <a href="messages.html" class="nav-item"><span class="icon">💬</span><span class="label">Messages</span></a>
+            <a href="connections.html" class="nav-item active"><span class="icon">🤝</span><span
+                    class="label">Connections</span></a>
+            <a href="projects.html" class="nav-item"><span class="icon">📁</span><span class="label">Projects</span></a>
+            <a href="communities.html" class="nav-item"><span class="icon">👥</span><span
+                    class="label">Communities</span></a>
+            <a href="events.html" class="nav-item"><span class="icon">📅</span><span class="label">Events</span></a>
+            <a href="mentorship.html" class="nav-item"><span class="icon">🎓</span><span
+                    class="label">Mentorship</span></a>
+            <a href="settings.html" class="nav-item"><span class="icon">⚙️</span><span class="label">Settings</span></a>
+        </nav>
+        <div class="sidebar-footer"><button class="btn btn-small btn-logout" onclick="logout()">Logout</button></div>
+    </aside>
+
+    <div class="main-content">
+        <header class="top-bar">
+            <div class="search-bar"><input type="text" placeholder="Search connections..." id="connectionSearch"></div>
+            <div class="top-bar-actions">
+                <div class="notifications-btn" id="notificationsBtn"><span class="icon">🔔</span><span
+                        class="badge">5</span></div>
+                <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+                    <img src="assets/default-avatar.png" alt="Profile"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect fill=\'%234A90E2\' width=\'40\' height=\'40\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'white\' font-size=\'16\'%3EU%3C/text%3E%3C/svg%3E'">
+                    <span id="userNameDisplay">User</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="connections-container">
+            <div class="page-header">
+                <h1>My Network</h1>
+                <div class="network-stats" id="networkStats">
+                    <div class="stat"><strong id="totalConnections">0</strong><span>Connections</span></div>
+                    <div class="stat"><strong id="pendingRequests">0</strong><span>Pending</span></div>
+                </div>
+            </div>
+
+            <div class="connection-tabs">
+                <button class="tab-btn active" onclick="filterConnections('all')">All Connections</button>
+                <button class="tab-btn" onclick="filterConnections('requests')">Requests <span class="badge"
+                        id="requestsBadge">0</span></button>
+                <button class="tab-btn" onclick="filterConnections('sent')">Sent</button>
+                <button class="tab-btn" onclick="filterConnections('suggestions')">Suggestions</button>
+            </div>
+
+            <div class="connections-grid" id="connectionsGrid"></div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/connections.js"></script>
+</body>
+
+</html>

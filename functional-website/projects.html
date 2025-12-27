@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Campus Connect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/projects.css">
+</head>
+
+<body class="dashboard-page">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Campus Connect</h2>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item"><span class="icon">🏠</span><span
+                    class="label">Dashboard</span></a>
+            <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label">My
+                    Profile</span></a>
+            <a href="discover.html" class="nav-item"><span class="icon">🔍</span><span class="label">Discover
+                    Peers</span></a>
+            <a href="messages.html" class="nav-item"><span class="icon">💬</span><span class="label">Messages</span></a>
+            <a href="connections.html" class="nav-item"><span class="icon">🤝</span><span
+                    class="label">Connections</span></a>
+            <a href="projects.html" class="nav-item active"><span class="icon">📁</span><span
+                    class="label">Projects</span></a>
+            <a href="communities.html" class="nav-item"><span class="icon">👥</span><span
+                    class="label">Communities</span></a>
+            <a href="events.html" class="nav-item"><span class="icon">📅</span><span class="label">Events</span></a>
+            <a href="mentorship.html" class="nav-item"><span class="icon">🎓</span><span
+                    class="label">Mentorship</span></a>
+            <a href="settings.html" class="nav-item"><span class="icon">⚙️</span><span class="label">Settings</span></a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn btn-small btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="top-bar">
+            <div class="search-bar"><input type="text" placeholder="Search projects..." id="projectSearch"></div>
+            <div class="top-bar-actions">
+                <div class="notifications-btn" id="notificationsBtn"><span class="icon">🔔</span><span
+                        class="badge">5</span></div>
+                <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+                    <img src="assets/default-avatar.png" alt="Profile"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect fill=\'%234A90E2\' width=\'40\' height=\'40\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'white\' font-size=\'16\'%3EU%3C/text%3E%3C/svg%3E'">
+                    <span id="userNameDisplay">User</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="projects-container">
+            <div class="page-header">
+                <h1>Projects</h1>
+                <button class="btn btn-primary" onclick="showCreateProjectModal()">+ Create Project</button>
+            </div>
+
+            <div class="project-tabs">
+                <button class="tab-btn active" onclick="filterProjects('all')">All Projects</button>
+                <button class="tab-btn" onclick="filterProjects('my')">My Projects</button>
+                <button class="tab-btn" onclick="filterProjects('joined')">Joined</button>
+                <button class="tab-btn" onclick="filterProjects('invites')">Invitations</button>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Project Modal -->
+    <div class="modal" id="createProjectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Project</h2>
+                <button class="modal-close" onclick="closeCreateProjectModal()">×</button>
+            </div>
+            <form id="createProjectForm">
+                <div class="form-group">
+                    <label>Project Title *</label>
+                    <input type="text" id="projectTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="projectDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Required Skills (comma separated)</label>
+                    <input type="text" id="projectSkills" placeholder="e.g., Python, JavaScript, Design">
+                </div>
+                <div class="form-group">
+                    <label>Team Size</label>
+                    <input type="number" id="projectTeamSize" min="2" max="20" value="4">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="projectCategory">
+                        <option value="development">Development</option>
+                        <option value="research">Research</option>
+                        <option value="design">Design</option>
+                        <option value="study">Study Group</option>
+                        <option value="hackathon">Hackathon</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeCreateProjectModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/projects.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Campus Connect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card wide">
+            <div class="auth-header">
+                <h1>Join Campus Connect</h1>
+                <p>Complete your profile to start connecting</p>
+            </div>
+            
+            <!-- Progress Indicator -->
+            <div class="progress-steps">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Account</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Profile</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Skills</span>
+                </div>
+                <div class="step" data-step="4">
+                    <span class="step-number">4</span>
+                    <span class="step-label">Interests</span>
+                </div>
+            </div>
+            
+            <form class="auth-form onboarding-form" id="signupForm">
+                <!-- Step 1: Account Creation -->
+                <div class="form-step active" data-step="1">
+                    <h3>Create Your Account</h3>
+                    
+                    <div class="form-group">
+                        <label for="collegeEmail">College Email *</label>
+                        <input type="email" id="collegeEmail" name="collegeEmail" placeholder="yourname@college.edu" required>
+                        <small class="form-hint">We'll send a verification code</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="collegeId">College ID *</label>
+                        <input type="text" id="collegeId" name="collegeId" placeholder="Enter your student ID" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Password *</label>
+                        <input type="password" id="signupPassword" name="password" required>
+                        <small class="form-hint">Minimum 8 characters</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next</button>
+                </div>
+                
+                <!-- Step 2: Profile Details -->
+                <div class="form-step" data-step="2">
+                    <h3>Tell Us About Yourself</h3>
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="department">Department *</label>
+                            <select id="department" name="department" required>
+                                <option value="">Select Department</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Business">Business</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Science">Science</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="year">Year *</label>
+                            <select id="year" name="year" required>
+                                <option value="">Select Year</option>
+                                <option value="1">1st Year</option>
+                                <option value="2">2nd Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
+                                <option value="Graduate">Graduate</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" name="bio" rows="3" placeholder="Tell others about yourself..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goals">Your Goals</label>
+                        <textarea id="goals" name="goals" rows="3" placeholder="What do you want to achieve in college?"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Skills -->
+                <div class="form-step" data-step="3">
+                    <h3>Add Your Skills</h3>
+                    <p class="step-description">Add both technical and non-technical skills</p>
+                    
+                    <div class="form-group">
+                        <label for="skillInput">Add Skills</label>
+                        <div class="skill-input-container">
+                            <input type="text" id="skillInput" placeholder="e.g., Python, Leadership, Public Speaking">
+                            <select id="proficiencyLevel">
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                            <button type="button" class="btn btn-small" onclick="addSkill()">Add</button>
+                        </div>
+                    </div>
+                    
+                    <div id="skillsList" class="skills-container">
+                        <!-- Skills will be added here dynamically -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Suggested Skills</label>
+                        <div class="suggested-skills">
+                            <button type="button" class="skill-tag" onclick="addSuggestedSkill('JavaScript', 'intermediate')">JavaScript</button>
+                            <button type="button" class="skill-tag" onclick="addSuggestedSkill('Python', 'intermediate')">Python</button>
+                            <button type="button" class="skill-tag" onclick="addSuggestedSkill('Communication', 'intermediate')">Communication</button>
+                            <button type="button" class="skill-tag" onclick="addSuggestedSkill('Teamwork', 'intermediate')">Teamwork</button>
+                            <button type="button" class="skill-tag" onclick="addSuggestedSkill('Problem Solving', 'intermediate')">Problem Solving</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(4)">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Interests -->
+                <div class="form-step" data-step="4">
+                    <h3>Your Interests</h3>
+                    <p class="step-description">Select topics you're passionate about to find like-minded peers</p>
+                    
+                    <div class="form-group">
+                        <label>Select Your Interests</label>
+                        <div class="interests-grid">
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-webdev" name="interests" value="Web Development">
+                                <label for="int-webdev">Web Development</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-ai" name="interests" value="AI/ML">
+                                <label for="int-ai">AI/ML</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-mobile" name="interests" value="Mobile Dev">
+                                <label for="int-mobile">Mobile Dev</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-design" name="interests" value="Design">
+                                <label for="int-design">Design</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-data" name="interests" value="Data Science">
+                                <label for="int-data">Data Science</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-cyber" name="interests" value="Cybersecurity">
+                                <label for="int-cyber">Cybersecurity</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-game" name="interests" value="Game Dev">
+                                <label for="int-game">Game Dev</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-blockchain" name="interests" value="Blockchain">
+                                <label for="int-blockchain">Blockchain</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-research" name="interests" value="Research">
+                                <label for="int-research">Research</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-startup" name="interests" value="Startups">
+                                <label for="int-startup">Startups</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-music" name="interests" value="Music">
+                                <label for="int-music">Music</label>
+                            </div>
+                            <div class="interest-item">
+                                <input type="checkbox" id="int-sports" name="interests" value="Sports">
+                                <label for="int-sports">Sports</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customInterests">Other Interests (comma-separated)</label>
+                        <input type="text" id="customInterests" placeholder="e.g., Photography, Writing, Robotics">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+                        <button type="submit" class="btn btn-primary">Complete Registration</button>
+                    </div>
+                </div>
+            </form>
+            
+            <div id="authMessage" class="auth-message"></div>
+        </div>
+        
+        <div class="auth-footer">
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/onboarding.js"></script>
+</body>
+</html>

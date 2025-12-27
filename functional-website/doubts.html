@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymous Doubts - Campus Connect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/doubts.css">
+</head>
+
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Campus Connect</h2>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <span class="icon">🏠</span>
+                <span class="label">Dashboard</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="icon">👤</span>
+                <span class="label">My Profile</span>
+            </a>
+            <a href="discover.html" class="nav-item">
+                <span class="icon">🔍</span>
+                <span class="label">Discover Peers</span>
+            </a>
+            <a href="problems.html" class="nav-item">
+                <span class="icon">💡</span>
+                <span class="label">Problems</span>
+            </a>
+            <a href="doubts.html" class="nav-item active">
+                <span class="icon">❓</span>
+                <span class="label">Doubts</span>
+            </a>
+            <a href="messages.html" class="nav-item">
+                <span class="icon">💬</span>
+                <span class="label">Messages</span>
+            </a>
+            <a href="connections.html" class="nav-item">
+                <span class="icon">🤝</span>
+                <span class="label">Connections</span>
+            </a>
+            <a href="projects.html" class="nav-item">
+                <span class="icon">📁</span>
+                <span class="label">Projects</span>
+            </a>
+            <a href="communities.html" class="nav-item">
+                <span class="icon">👥</span>
+                <span class="label">Communities</span>
+            </a>
+            <a href="events.html" class="nav-item">
+                <span class="icon">📅</span>
+                <span class="label">Events</span>
+            </a>
+            <a href="mentorship.html" class="nav-item">
+                <span class="icon">🎓</span>
+                <span class="label">Mentorship</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <span class="icon">⚙️</span>
+                <span class="label">Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn btn-small btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <input type="text" placeholder="Search doubts..." id="doubtSearch">
+            </div>
+
+            <div class="top-bar-actions">
+                <button class="btn btn-primary" id="emergencyHelpBtn" title="Emergency Help">
+                    🚨 Emergency Help
+                </button>
+                <div class="notifications-btn" id="notificationsBtn">
+                    <span class="icon">🔔</span>
+                    <span class="badge">5</span>
+                </div>
+
+                <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+                    <img src="assets/default-avatar.png" alt="Profile"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect fill=\'%234A90E2\' width=\'40\' height=\'40\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'white\' font-size=\'16\'%3EU%3C/text%3E%3C/svg%3E'">
+                    <span id="userNameDisplay">User</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Doubts Content -->
+        <div class="doubts-container">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">❓ Anonymous Doubts Portal</h1>
+                    <p class="page-subtitle">Ask doubts anonymously and get help from seniors and skilled peers</p>
+                </div>
+                <button class="btn btn-primary" id="postDoubtBtn">+ Post Doubt</button>
+            </div>
+
+            <!-- Privacy Notice -->
+            <div class="privacy-notice">
+                <div class="notice-icon">🔒</div>
+                <div class="notice-content">
+                    <h4>Your Privacy is Protected</h4>
+                    <p>All doubts are posted anonymously. Your identity is never revealed unless you choose to connect
+                        directly.</p>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-bar">
+                <select id="departmentFilter">
+                    <option value="">All Departments</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Business">Business</option>
+                    <option value="Science">Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                </select>
+
+                <select id="subjectFilter">
+                    <option value="">All Subjects</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Economics">Economics</option>
+                </select>
+
+                <select id="yearFilter">
+                    <option value="">All Years</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+
+                <select id="sortFilter">
+                    <option value="recent">Most Recent</option>
+                    <option value="popular">Most Popular</option>
+                    <option value="unanswered">Unanswered</option>
+                </select>
+            </div>
+
+            <!-- Doubts List -->
+            <div class="doubts-list" id="doubtsList">
+                <!-- Doubts will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">❓</div>
+                <h3>No doubts found</h3>
+                <p>Be the first to ask a doubt!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post Doubt Modal -->
+    <div class="modal" id="postDoubtModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔒 Post Anonymous Doubt</h3>
+                <button class="modal-close" onclick="closeDoubtModal()">&times;</button>
+            </div>
+            <form id="postDoubtForm">
+                <div class="anonymous-notice">
+                    This doubt will be posted anonymously. Your identity will not be revealed.
+                </div>
+
+                <div class="form-group">
+                    <label for="doubtTitle">Doubt Title *</label>
+                    <input type="text" id="doubtTitle" placeholder="Briefly describe your doubt" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="doubtDescription">Detailed Description *</label>
+                    <textarea id="doubtDescription" rows="6" placeholder="Explain your doubt in detail..."
+                        required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="doubtDepartment">Department *</label>
+                        <select id="doubtDepartment" required>
+                            <option value="">Select department</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Business">Business</option>
+                            <option value="Science">Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doubtYear">Your Year *</label>
+                        <select id="doubtYear" required>
+                            <option value="">Select year</option>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="doubtSubject">Subject *</label>
+                    <input type="text" id="doubtSubject" placeholder="e.g., Data Structures, Calculus" required>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeDoubtModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Post Anonymously</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Doubt Details Modal -->
+    <div class="modal" id="doubtDetailsModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="detailsTitle">Doubt Details</h3>
+                <button class="modal-close" onclick="closeDetailsModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="doubtDetailsBody">
+                <!-- Doubt details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Help Modal -->
+    <div class="modal" id="emergencyModal">
+        <div class="modal-content">
+            <div class="modal-header"
+                style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; border-radius: 12px 12px 0 0;">
+                <h3>🚨 Emergency Help Request</h3>
+                <button class="modal-close" style="color: white;" onclick="closeEmergencyModal()">&times;</button>
+            </div>
+            <form id="emergencyForm">
+                <div class="emergency-notice">
+                    This will instantly notify available skilled peers who can help you right now.
+                </div>
+
+                <div class="form-group">
+                    <label for="emergencyProblem">What do you need help with? *</label>
+                    <input type="text" id="emergencyProblem"
+                        placeholder="e.g., Deadline in 2 hours, stuck on critical bug" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emergencyDetails">Details *</label>
+                    <textarea id="emergencyDetails" rows="4" placeholder="Briefly explain the urgent issue..."
+                        required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="emergencySkill">Required Skill *</label>
+                    <input type="text" id="emergencySkill" placeholder="e.g., Python, React, Database" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emergencyUrgency">Urgency Level *</label>
+                    <select id="emergencyUrgency" required>
+                        <option value="critical">🔴 Critical (< 1 hour)</option>
+                        <option value="urgent">🟠 Urgent (< 3 hours)</option>
+                        <option value="important">🟡 Important (< 6 hours)</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeEmergencyModal()">Cancel</button>
+                    <button type="submit" class="btn" style="background: #ef4444; color: white;">Send Emergency
+                        Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/doubts.js"></script>
+</body>
+
+</html>

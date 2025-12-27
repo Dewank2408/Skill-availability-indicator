@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connecting skilled and like-minded students within colleges">
+    <title>Campus Connect - Bridging Student Networks</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>Campus Connect</h1>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#problem" class="nav-link">The Problem</a></li>
+                    <li><a href="#solution" class="nav-link">Our Solution</a></li>
+                    <li><a href="#join" class="nav-link">Join Us</a></li>
+                    <li><a href="login.html" class="nav-link">Login</a></li>
+                    <li><a href="signup.html" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">Sign Up</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title">DIFFICULTY IN CONNECTING WITH SKILLED AND LIKE-MINDED STUDENTS WITHIN A
+                        COLLEGE</h2>
+                    <p class="hero-description">Breaking barriers and building meaningful connections for collaborative
+                        growth</p>
+                    <a href="signup.html" class="btn btn-primary" id="ctaButton">Get Started</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="problem" class="about">
+            <div class="container">
+                <h2 class="section-title">The Challenge We Face</h2>
+                <div class="about-content">
+                    <p>In today's college environment, students with specialized skills and shared interests often
+                        struggle to find each other. Despite being surrounded by hundreds or thousands of peers,
+                        identifying collaborators for projects, study groups, or shared passions remains surprisingly
+                        difficult. This isolation limits learning opportunities, stifles innovation, and reduces the
+                        overall college experience.</p>
+                    <br>
+                    <p>Traditional methods like bulletin boards, generic social media groups, or random encounters are
+                        inefficient and don't facilitate meaningful connections based on skills, interests, and academic
+                        goals.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution" class="services">
+            <div class="container">
+                <h2 class="section-title">Our Solution</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🔍</div>
+                        <h3>Skill-Based Matching</h3>
+                        <p>Find students based on technical skills, academic interests, and project goals to form the
+                            perfect team</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🤝</div>
+                        <h3>Interest Communities</h3>
+                        <p>Join or create communities around shared passions, from coding clubs to research groups</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💡</div>
+                        <h3>Collaboration Hub</h3>
+                        <p>Discover ongoing projects, hackathons, and study sessions where you can contribute and grow
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📚</div>
+                        <h3>Knowledge Sharing</h3>
+                        <p>Exchange resources, notes, and expertise with peers who understand your academic journey</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎯</div>
+                        <h3>Goal-Oriented Groups</h3>
+                        <p>Form study groups, project teams, or research partnerships with students who share your
+                            ambitions</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🌐</div>
+                        <h3>Campus-Wide Network</h3>
+                        <p>Break out of your immediate circle and connect with talented students across all departments
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="join" class="contact">
+            <div class="container">
+                <h2 class="section-title">Join the Movement</h2>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem; color: var(--text-light);">Be part
+                    of the solution. Share your interests and help us build a platform that truly connects students.</p>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">College Email</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@college.edu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="skills">Your Skills/Interests</label>
+                        <input type="text" id="skills" name="skills"
+                            placeholder="e.g., Python, Machine Learning, Web Development" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">What connections are you looking for?</label>
+                        <textarea id="message" name="message" rows="5"
+                            placeholder="Tell us about the kind of collaborators or communities you'd like to connect with..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Join Waitlist</button>
+                </form>
+                <div id="formMessage" class="form-message"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Campus Connect. Empowering student collaboration.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
